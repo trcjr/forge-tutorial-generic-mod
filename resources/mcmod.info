@@ -1,0 +1,19 @@
+[
+{
+  "modid": "ForgeTutorialGenericMod",
+  "name": "ForgeTutorialGenericMod",
+  "description": "The Forge Tutorial Generic Mod",
+  "version": "0.0.0.a",
+  "credits": "Steve",
+  "logoFile": "/gfx/forge-tutorial-generic-mod/logo.png",
+  "mcversion": "1.4.5",
+  "url": "http://www.mod-buildcraft.com/",
+  "updateUrl": "",
+  "authors": [ "SpaceToad", "Krapht", "SirSengir", "Others" ],
+  "parent":"",
+  "screenshots": [],
+  "dependencies": [
+     "mod_MinecraftForge"
+  ]
+}
+]

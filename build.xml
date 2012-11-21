@@ -219,6 +219,7 @@
     <!-- Zip the compiled files -->
     <target name="package" depends="compile">
 
+        <delete dir="${jar.dir}"/>
         <mkdir dir="${jar.dir}"/>
         <jar destfile="${jar.dir}/${ant.project.name}-${mod.version.full}.jar" basedir="${classes.dir}"/>
 

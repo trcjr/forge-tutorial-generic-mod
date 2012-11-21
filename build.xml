@@ -1,9 +1,11 @@
-<project name="BuildCraft" default="main">
+<project name="forge-tutorial-generic-mod" default="main">
     <property environment="env" />
     <!-- Properties -->
 
     <property name="build.dir"           value="build"/>
-    <property name="src.dir"             value="forge-tutorial-generic-mod"/>
+    <property name="src.dir"             value="src"/>
+    <property name="resource.dir"        value="resources"/>
+    <property name="mcmod.file"          value="${resource.dir}/mcmod.info"/>
 
     <property name="download.dir"        value="${build.dir}/download"/>
 
@@ -18,15 +20,15 @@
 
     <property name="mcp.version"         value="723"/>
     <property name="minecraft.version"   value="1.4.5"/>
-    <property name="forge.version"       value="6.4.0.390"/>
-    <property name="mod.version"          value="0.0.1"/>
+    <property name="forge.version"       value="${minecraft.version}-6.4.0.394"/>
+    <property name="mod.version"          value="0.1"/>
 
     <available property="forge-exists" file="${download.dir}/minecraftforge-src-${forge.version}.zip"/>
     <condition property="should-download-ant-contrib">
         <not>
             <or>
                 <available file="${download.dir}/ant-contrib/ant-contrib-1.0b3.jar"/>
-                <available file="${download.dir}/minecraftforge-src-${minecraft.version}-${forge.version}.zip"/>
+                <available file="${download.dir}/minecraftforge-src-${forge.version}.zip"/>
             </or>
         </not>
     </condition>
@@ -57,7 +59,7 @@
     </target>
 
     <target name="version-not-provided" unless="env.BUILD_NUMBER">
-        <property name="build.number" value="unknown"/>
+        <buildnumber/>
     </target>
 
     <target name="version-provided" if="env.BUILD_NUMBER">
@@ -165,15 +167,18 @@
         <copy todir="${mcpsrc.dir}/minecraft">
             <fileset dir="${src.dir}/minecraft">
             </fileset>
+            <filterset>
+                <filter token="VERSION" value="${mod.version.full}" />
+                <filter token="BUILD_NUMBER" value="${build.number}" />
+            </filterset>
         </copy>
 
         <!-- Copy Common source -->
         <copy todir="${mcpsrc.dir}/common">
             <fileset dir="${src.dir}/common">
-                <exclude name="**/buildcraft/devel"/>
             </fileset>
             <filterset>
-                <filter token="VERSION" value="${mod.version}" />
+                <filter token="VERSION" value="${mod.version.full}" />
                 <filter token="BUILD_NUMBER" value="${build.number}" />
             </filterset>
         </copy>
@@ -203,20 +208,12 @@
 
         <!-- Copy resources -->
         <copy todir="${classes.dir}">
-            <fileset dir="${src.dir}/resources">
+            <fileset dir="${resource.dir}">
                 <exclude name="build.xml"/>
                 <exclude name="build.number"/>
             </fileset>
         </copy>
 
-        <!-- Copy localizations -->
-<!--
-        <copy todir="${classes.dir}" failonerror="false">
-            <fileset dir="${lang.dir}">
-                <exclude name="README.md"/>
-            </fileset>
-        </copy>
--->
     </target>
 
     <!-- Zip the compiled files -->

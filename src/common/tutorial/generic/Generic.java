@@ -36,7 +36,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
  * initNameOfSection. This is done for clarity in this base source, and the
  * function is inlined in the tutorials themselves.
  */
-@Mod(modid="Generic", name="Generic", version="0.0.0")
+@Mod(modid="Generic", name="Generic", version="@VERSION@")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false, 
 	channels={"GenericRandom"}, packetHandler = PacketHandler.class)
 public class Generic {
